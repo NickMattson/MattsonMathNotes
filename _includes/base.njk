@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title | default("Home") }} - Mr. Mattson's Online Math Notes</title> {# Browser Tab Title #}
+    <link rel="stylesheet" href="/css/style.css">
+
+    {# --- MathJax Configuration --- #}
+    <script>
+      MathJax = {
+        tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']], processEscapes: true },
+        svg: { fontCache: 'global' }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+    {# This container helps manage the sidebar state via class toggling #}
+    <div class="page-container">
+
+        {# --- Sidebar Navigation (Now starts hidden on mobile, no internal header) --- #}
+        <aside class="sidebar" id="sidebar">
+            <nav class="sidebar-nav">
+                {# ===== ACCURATE & COMPLETE Static Navigation Example ===== #}
+                <ul class="nav-list">
+                    {# --- Math 8 --- #}
+                    <li class="nav-item has-submenu">
+                        <div class="nav-item-content">
+                            <a href="/math8/">Math 8</a>
+                            <button class="submenu-toggle" aria-expanded="false" aria-controls="submenu-math8">
+                                <span class="visually-hidden">Toggle Math 8 submenu</span>
+                                <span class="toggle-icon" aria-hidden="true">+</span>
+                            </button>
+                        </div>
+                        <ul class="submenu" id="submenu-math8" hidden>
+                            <li><a href="/math8/squares-cubes-roots/">Squares/Cubes/Roots</a></li>
+                            <li><a href="/math8/percents/">Percents</a></li>
+                            <li><a href="/math8/proportional-reasoning/">Proportional Reasoning</a></li>
+                            <li><a href="/math8/fraction-operations/">Fraction Operations</a></li>
+                            <li><a href="/math8/linear-relations/">Linear Relations</a></li>
+                            <li><a href="/math8/expressions/">Expressions</a></li>
+                            <li><a href="/math8/two-step-equations/">Two-Step Equations</a></li>
+                            <li><a href="/math8/surface-area-volume/">Surface Area & Volume</a></li>
+                            <li><a href="/math8/pythagorean-theorem/">Pythagorean Theorem</a></li>
+                            <li><a href="/math8/3d-objects-views-nets/">3D Objects/Views/Nets</a></li>
+                            <li><a href="/math8/central-tendency/">Central Tendency</a></li>
+                            <li><a href="/math8/probability/">Probability</a></li>
+                            <li><a href="/math8/financial-literacy/">Financial Literacy</a></li>
+                        </ul>
+                    </li>
+                    {# --- Math 9 --- #}
+                    <li class="nav-item has-submenu">
+                         <div class="nav-item-content">
+                            <a href="/math9/">Math 9</a>
+                            <button class="submenu-toggle" aria-expanded="false" aria-controls="submenu-math9">
+                                <span class="visually-hidden">Toggle Math 9 submenu</span>
+                                <span class="toggle-icon" aria-hidden="true">+</span>
+                            </button>
+                        </div>
+                         <ul class="submenu" id="submenu-math9" hidden>
+                            <li><a href="/math9/operations/">Operations</a></li>
+                            <li><a href="/math9/exponents/">Exponents</a></li>
+                            <li><a href="/math9/polynomials/">Polynomials</a></li>
+                            <li><a href="/math9/linear-relations/">Linear Relations</a></li>
+                            <li><a href="/math9/linear-equations/">Linear Equations</a></li>
+                            <li><a href="/math9/proportional-reasoning/">Proportional Reasoning</a></li>
+                            <li><a href="/math9/statistics/">Statistics</a></li>
+                            <li><a href="/math9/financial-literacy/">Financial Literacy</a></li>
+                        </ul>
+                    </li>
+                     {# --- FMP 10 --- #}
+                    <li class="nav-item has-submenu">
+                         <div class="nav-item-content">
+                            <a href="/fmp10/">FMP 10</a>
+                             <button class="submenu-toggle" aria-expanded="false" aria-controls="submenu-fmp10">
+                                <span class="visually-hidden">Toggle FMP 10 submenu</span>
+                                <span class="toggle-icon" aria-hidden="true">+</span>
+                            </button>
+                        </div>
+                         <ul class="submenu" id="submenu-fmp10" hidden>
+                            <li><a href="/fmp10/powers-exponents/">Powers & Exponents</a></li>
+                            <li><a href="/fmp10/prime-factorization/">Prime Factorization</a></li>
+                            <li><a href="/fmp10/functions-relations/">Functions & Relations</a></li>
+                            <li><a href="/fmp10/linear-functions/">Linear Functions</a></li>
+                            <li><a href="/fmp10/arithmetic-sequences/">Arithmetic Sequences</a></li>
+                            <li><a href="/fmp10/systems-linear-equations/">Systems of Linear Eq.</a></li>
+                            <li><a href="/fmp10/polynomial-multiplication/">Polynomial Multiplication</a></li>
+                            <li><a href="/fmp10/polynomial-factoring/">Polynomial Factoring</a></li>
+                            <li><a href="/fmp10/trigonometry/">Trigonometry</a></li>
+                            <li><a href="/fmp10/financial-literacy/">Financial Literacy</a></li>
+                         </ul>
+                    </li>
+                    {# --- Pre-Calc 11 --- #}
+                    <li class="nav-item has-submenu">
+                        <div class="nav-item-content">
+                            <a href="/pc11/">Pre-Calc 11</a>
+                            <button class="submenu-toggle" aria-expanded="false" aria-controls="submenu-pc11">
+                                <span class="visually-hidden">Toggle Pre-Calc 11 submenu</span>
+                                <span class="toggle-icon" aria-hidden="true">+</span>
+                            </button>
+                        </div>
+                        <ul class="submenu" id="submenu-pc11" hidden>
+                            <li><a href="/pc11/real-numbers/">Real Numbers</a></li>
+                            <li><a href="/pc11/powers-rational-exponents/">Powers (Rational Exp.)</a></li>
+                            <li><a href="/pc11/radicals/">Radicals</a></li>
+                            <li><a href="/pc11/polynomial-factoring/">Polynomial Factoring</a></li>
+                            <li><a href="/pc11/rational-expressions-equations/">Rational Expressions/Eq.</a></li>
+                            <li><a href="/pc11/quadratic-functions-equations/">Quadratic Functions/Eq.</a></li>
+                            <li><a href="/pc11/linear-quadratic-inequalities/">Inequalities</a></li>
+                            <li><a href="/pc11/trigonometry-non-right/">Trigonometry (Non-Right)</a></li>
+                            <li><a href="/pc11/financial-literacy/">Financial Literacy</a></li>
+                        </ul>
+                    </li>
+                    {# --- Pre-Calc 12 --- #}
+                    <li class="nav-item has-submenu">
+                         <div class="nav-item-content">
+                            <a href="/pc12/">Pre-Calc 12</a>
+                            <button class="submenu-toggle" aria-expanded="false" aria-controls="submenu-pc12">
+                                <span class="visually-hidden">Toggle Pre-Calc 12 submenu</span>
+                                <span class="toggle-icon" aria-hidden="true">+</span>
+                            </button>
+                        </div>
+                        <ul class="submenu" id="submenu-pc12" hidden>
+                            <li><a href="/pc12/transformations-functions/">Transformations</a></li>
+                            <li><a href="/pc12/exponential-functions-equations/">Exponential Functions/Eq.</a></li>
+                            <li><a href="/pc12/geometric-sequences-series/">Geometric Sequences/Series</a></li>
+                            <li><a href="/pc12/logarithms/">Logarithms</a></li>
+                            <li><a href="/pc12/polynomial-functions-equations/">Polynomial Functions/Eq.</a></li>
+                            <li><a href="/pc12/rational-functions/">Rational Functions</a></li>
+                            <li><a href="/pc12/trigonometry-functions-equations-identities/">Trigonometry (Functions/Eq./Id.)</a></li>
+                        </ul>
+                    </li>
+                    {# --- Calculus 12 --- #}
+                    <li class="nav-item has-submenu">
+                         <div class="nav-item-content">
+                            <a href="/calc12/">Calculus 12</a>
+                            <button class="submenu-toggle" aria-expanded="false" aria-controls="submenu-calc12">
+                                <span class="visually-hidden">Toggle Calculus 12 submenu</span>
+                                <span class="toggle-icon" aria-hidden="true">+</span>
+                             </button>
+                        </div>
+                        <ul class="submenu" id="submenu-calc12" hidden>
+                             <li><a href="/calc12/functions-graphs-review/">Functions & Graphs Review</a></li>
+                            <li><a href="/calc12/limits-continuity/">Limits & Continuity</a></li>
+                            <li><a href="/calc12/differentiation-definition-rules/">Differentiation Rules</a></li>
+                            <li><a href="/calc12/differentiation-applications/">Differentiation Applications</a></li>
+                            <li><a href="/calc12/integration-basics-ftc/">Integration Basics & FTC</a></li>
+                            <li><a href="/calc12/integration-methods/">Integration Methods</a></li>
+                            <li><a href="/calc12/integration-applications/">Integration Applications</a></li>
+                            <li><a href="/calc12/differential-equations/">Differential Equations</a></li>
+                        </ul>
+                    </li>
+                    {# === End Static Example === #}
+                </ul>
+            </nav>
+            {# Removed sidebar footer for cleaner look, can be added back if needed #}
+        </aside>
+
+         {# --- Main Content Area --- #}
+        <main class="main-content" id="main-content">
+             {# --- Main Header --- #}
+            <header class="main-header">
+                 <button class="sidebar-toggle-button" id="sidebar-toggle-button" aria-label="Toggle Sidebar" aria-expanded="true" aria-controls="sidebar">
+                    ☰ {# Hamburger icon HTML entity #}
+                </button>
+                <h1 class="site-title"><a href="/">Mr. Mattson's Online Math Notes</a></h1>
+                <a href="/contact/" class="header-contact-link">Contact</a>
+            </header>
+
+            {# --- Main Article Content --- #}
+            <article>
+                <h2 class="page-title">{{ title }}</h2>
+                {{ content | safe }}
+            </article>
+            {# --- End Article Content --- #}
+
+
+            {# --- Previous/Next Page Navigation (Correct Position) --- #}
+            <nav class="page-navigation" aria-label="Lesson">
+                <hr> {# Separator #}
+                <ul class="page-navigation-list">
+                    <li class="page-navigation-item prev">
+                        {% if page.data.previousInSection %}
+                            <a href="{{ page.data.previousInSection.url | url }}">
+                                <span class="label" aria-hidden="true">← Previous</span>
+                                <span class="title">{{ page.data.previousInSection.data.title }}</span>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li class="page-navigation-item next">
+                         {% if page.data.nextInSection %}
+                            <a href="{{ page.data.nextInSection.url | url }}">
+                                <span class="label" aria-hidden="true">Next →</span>
+                                <span class="title">{{ page.data.nextInSection.data.title }}</span>
+                            </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            
+            {# --- End Previous/Next Navigation --- #}
+
+
+             {# --- Content Footer --- #}
+             <footer class="content-footer">
+                <hr>
+                <p>© 2025 Nick Mattson</p>
+            </footer>
+             {# --- End Content Footer --- #}
+
+        </main> {# End Main Content #}
+
+    </div> {# End page-container #}
+
+    {# --- JavaScript for Navigation --- #}
+    <script src="/js/navigation.js" defer></script>
+
+</body>
+</html>

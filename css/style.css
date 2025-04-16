@@ -1,0 +1,467 @@
+/* css/style.css - Modern Dark Theme with Toggleable Left Sidebar */
+
+:root {
+    /* --- Colors --- */
+    --accent-blue: #3b82f6; /* Brighter blue for modern feel */
+    --accent-red: #ef4444; /* Tailwind Red-500 */
+    --bg-color: #1f2937;        /* Slightly bluish dark grey (Tailwind Gray-800) */
+    --sidebar-bg: #111827;    /* Darker bluish grey (Tailwind Gray-900) */
+    --text-color: #d1d5db;      /* Lighter grey text (Tailwind Gray-300) */
+    --heading-color: #f9fafb;   /* Almost white headings (Tailwind Gray-50) */
+    --link-color: var(--accent-blue); /* Default accent - CHANGE TO --accent-red FOR RED */
+    --link-hover-color: #60a5fa; /* Lighter blue on hover (Tailwind Blue-400)*/
+    --border-color: #374151;    /* Tailwind Gray-700 */
+    --code-bg: #374151;        /* Tailwind Gray-700 */
+    --code-text: #e5e7eb;       /* Tailwind Gray-200 */
+    --sidebar-text: #9ca3af;    /* Tailwind Gray-400 */
+    --sidebar-link-hover-bg: #374151; /* Tailwind Gray-700 */
+    --sidebar-link-hover-text: #f9fafb; /* Tailwind Gray-50 */
+    --sidebar-link-active-bg: var(--accent-blue); /* Background for active link */
+    --sidebar-link-active-text: #ffffff; /* White text for active link */
+  
+    /* --- Fonts & Layout --- */
+    --main-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --code-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --content-max-width: 850px;
+    --sidebar-width: 280px;
+    --header-height: 60px; /* Height for the main header */
+  
+    /* --- Transitions --- */
+    --sidebar-transition: transform 0.3s ease-in-out;
+    --content-transition: margin-left 0.3s ease-in-out;
+  }
+  
+  /* --- Base Body & Page Layout --- */
+  body {
+    font-family: var(--main-font);
+    line-height: 1.7; /* Slightly more line height */
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    font-size: 16px; /* Base font size */
+  }
+  
+  .page-container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* --- Sidebar Styles --- */
+  .sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    height: 100vh;
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    z-index: 100; /* High z-index */
+    display: flex; /* Use flex */
+    flex-direction: column; /* Stack items */
+    transform: translateX(0); /* Default state: visible */
+    transition: var(--sidebar-transition);
+    border-right: 1px solid var(--border-color);
+  }
+  
+  .sidebar-nav {
+    flex-grow: 1;
+    overflow-y: auto; /* Scroll only if needed */
+    padding: 1.5em 0; /* More vertical padding */
+  }
+  
+  /* Hide sidebar when container has class */
+  .page-container.sidebar-hidden .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  /* --- Sidebar Navigation --- */
+  .sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+  .sidebar-nav li { margin: 0; }
+  
+  .nav-item-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      position: relative;
+  }
+  .nav-item-content:hover { background-color: var(--sidebar-link-hover-bg); }
+  .nav-item-content:hover a, .nav-item-content:hover .submenu-toggle { color: var(--sidebar-link-hover-text); }
+  
+  .nav-item-content a {
+      flex-grow: 1;
+      padding: 0.6em 1em 0.6em 1.75em; /* Adjusted padding */
+      color: var(--sidebar-text);
+      text-decoration: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      display: block;
+      font-weight: 500; /* Slightly bolder */
+  }
+  
+  /* Style for potentially active link (needs dynamic class from Eleventy later) */
+  .nav-item-content a[aria-current="page"],
+  .nav-item-content a.active-nav-link { /* Example class */
+       background-color: var(--sidebar-link-active-bg);
+       color: var(--sidebar-link-active-text);
+       font-weight: 600;
+       border-left: 3px solid var(--link-hover-color); /* Active indicator */
+       padding-left: calc(1.75em - 3px);
+  }
+  /* Hover on active link */
+  .nav-item-content:hover a[aria-current="page"],
+  .nav-item-content:hover a.active-nav-link {
+       background-color: var(--sidebar-link-active-bg); /* Keep active background */
+       color: var(--sidebar-link-active-text); /* Keep active text */
+  }
+  
+  
+  .submenu-toggle {
+      background: none; border: none; color: inherit; /* Inherit color from hover */
+      cursor: pointer; padding: 0.6em 1em; font-size: 0.8em; /* Smaller icon */
+      line-height: 1; flex-shrink: 0; transition: transform 0.2s ease, color 0.2s ease;
+      z-index: 2; /* Ensure clickable */
+      margin-left: auto; /* Push to far right */
+  }
+  .toggle-icon { font-weight: normal; width: 1em; text-align: center; display: inline-block; }
+  
+  .submenu { padding-left: 1em; /* Less indentation */ }
+  .submenu a { padding-left: 2.5em; font-size: 0.95em; font-weight: 400; /* Less bold sublinks */ }
+  .submenu .submenu { padding-left: 1em; } /* Deeper indent */
+  .submenu .submenu a { padding-left: 3.5em; } /* Deeper link indent */
+  
+  .submenu[hidden] { display: none; }
+  .submenu:not([hidden]) { display: block; }
+  
+  /* Rotate icon when open */
+  .nav-item.is-open > .nav-item-content .submenu-toggle { transform: rotate(90deg); }
+  
+  .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  
+  /* --- Main Content Area Styles --- */
+  .main-content {
+    flex-grow: 1;
+    padding: 0; /* Remove padding, header/article will have it */
+    background-color: var(--bg-color);
+    margin-left: var(--sidebar-width); /* Default margin when sidebar is visible */
+    transition: var(--content-transition);
+    min-width: 0; /* Prevent flexbox overflow issues */
+  }
+  .page-container.sidebar-hidden .main-content {
+    margin-left: 0; /* Remove margin when sidebar hidden */
+  }
+  
+  /* --- Main Header (within main content) --- */
+  .main-header {
+      display: flex;
+      align-items: center;
+      background-color: var(--sidebar-bg); /* Match sidebar bg */
+      color: var(--heading-color);
+      padding: 0 1.5em;
+      height: var(--header-height);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky; /* Sticky header */
+      top: 0;
+      z-index: 50; /* Below sidebar */
+  }
+  
+  .sidebar-toggle-button {
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.8em; /* Larger icon */
+      cursor: pointer;
+      padding: 0 0.5em 0 0; /* Padding right */
+      margin-right: 0.5em;
+      line-height: 1;
+  }
+  .sidebar-toggle-button:hover {
+      color: var(--link-hover-color);
+  }
+  
+  .site-title {
+      font-size: 1.4em;
+      margin: 0;
+      font-weight: 600;
+      white-space: nowrap; /* Prevent wrap */
+      overflow: hidden;
+      text-overflow: ellipsis; /* Add ... if too long */
+  }
+  
+  /* Article Styles */
+  .main-content article {
+      max-width: var(--content-max-width);
+      margin: 2em auto; /* Spacing and centering */
+      padding: 0 2em; /* Padding inside article */
+  }
+  .page-title { /* Specific page H2 */
+      margin-top: 0; /* No top margin if it's the first heading */
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.3em;
+      font-weight: 700;
+  }
+  
+  /* --- Standard Element Styles --- */
+  h1, h2, h3, h4, h5, h6 { color: var(--heading-color); margin: 1.8em 0 0.8em 0; line-height: 1.3; font-weight: 600; }
+  h1 { font-size: 2em; } h2 { font-size: 1.7em; } h3 { font-size: 1.4em; }
+  
+  a { color: var(--link-color); text-decoration: underline; text-decoration-color: var(--link-color); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--link-hover-color); text-decoration-color: var(--link-hover-color); }
+  
+  hr { border: none; border-top: 1px solid var(--border-color); margin: 2em 0; }
+  
+  code { background-color: var(--code-bg); color: var(--code-text); padding: 0.2em 0.4em; border-radius: 4px; font-family: var(--code-font); font-size: 0.9em; }
+  pre { background-color: var(--code-bg); color: var(--code-text); padding: 1em; border-radius: 6px; overflow-x: auto; font-family: var(--code-font); font-size: 0.9em; line-height: 1.5; }
+  pre code { background: none; padding: 0; font-size: inherit; color: inherit; } /* Reset inner code */
+  
+  ul, ol { padding-left: 1.5em; margin-bottom: 1em; } /* Tighter list indent */
+  li { margin-bottom: 0.4em; }
+  
+  mjx-container[jax="SVG"][display="true"] { display: block; text-align: center; margin: 1.5em 0; }
+  /* --- Allow wide MathJax display equations to scroll --- */
+  mjx-container[jax="SVG"][display="true"] {
+    /* display: block; */ /* Already set for centering */
+    /* text-align: center; */ /* Already set for centering */
+    /* margin: 1.5em 0; */ /* Already set */
+    overflow-x: auto;  /* Add horizontal scrollbar ONLY if needed */
+    padding-bottom: 6px; /* Add a little space below for scrollbar */
+}
+
+  .content-footer { margin-top: 4em; color: var(--sidebar-text); font-size: 0.9em; text-align: center; }
+  /* --- Example and Solution Styling --- */
+.example {
+    background-color: var(--code-bg); /* Use code background or a slightly different shade */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1em 1.5em;
+    margin: 1.5em 0;
+    /* box-shadow: 0 2px 4px rgba(0,0,0,0.2); */ /* Optional subtle shadow */
+}
+
+.example p:first-child {
+    margin-top: 0; /* Remove top margin from problem statement if it's a p tag */
+}
+
+.solution-toggle {
+    display: inline-block;
+    background-color: var(--sidebar-bg); /* Darker button */
+    color: var(--sidebar-text);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.4em 0.8em;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 0.5em;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.solution-toggle:hover {
+    background-color: var(--sidebar-link-hover-bg);
+    color: var(--sidebar-link-hover-text);
+}
+
+.solution {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: 1px dashed var(--border-color); /* Separator line */
+    /* background-color: rgba(0,0,0,0.1); */ /* Optional slightly different bg for solution */
+    /* padding-left: 1em; */ /* Optional indent for solution */
+}
+
+/* Ensure solution visibility toggles correctly */
+.solution[hidden] {
+    display: none;
+}
+.solution:not([hidden]) {
+    display: block;
+}
+
+/* --- Contact Link in Header --- */
+.header-contact-link {
+    margin-left: auto; /* THIS PUSHES IT TO THE RIGHT */
+    padding: 0.4em 0.8em; /* Make it easy to click */
+    color: var(--sidebar-text); /* Use a slightly muted color */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95em;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.header-contact-link:hover {
+    color: var(--sidebar-link-hover-text);
+    background-color: var(--sidebar-link-hover-bg); /* Subtle background like sidebar links */
+    text-decoration: none;
+}
+
+/* Optional: Adjust title margin if needed to prevent overlap */
+.site-title {
+    margin-right: 1em; /* Add some space between title and contact link */
+    /* Ensure it doesn't grow and push the contact link too early */
+    flex-shrink: 1; /* Allow title to shrink if needed */
+    min-width: 100px; /* Prevent title from becoming too small */
+}
+
+/* --- BEDMAS Explanation Styling --- */
+.bedmas-steps {
+    margin: 2em 0;
+    padding: 1.5em;
+    background-color: var(--code-bg); /* Use code background for contrast */
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.bedmas-steps .step {
+    display: flex; /* Arrange letter and details side-by-side */
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: 1.5em;
+    padding-bottom: 1.5em;
+    border-bottom: 1px dashed var(--border-color);
+}
+.bedmas-steps .step:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.bedmas-steps .step-letter {
+    font-size: 2.5em; /* Larger letter */
+    font-weight: 700;
+    color: var(--accent-blue); /* Use accent color */
+    margin: 0 1em 0 0; /* Space to the right */
+    padding-right: 1em;
+    border-right: 2px solid var(--border-color);
+    line-height: 1.1;
+    min-width: 60px; /* Ensure space for DM/AS */
+    text-align: center;
+}
+
+.bedmas-steps .step-details h4 {
+    margin: 0 0 0.5em 0; /* Adjust heading margin */
+    font-size: 1.2em;
+    color: var(--heading-color);
+}
+
+.bedmas-steps .step-details p {
+    margin: 0.3em 0;
+    color: var(--text-color);
+}
+
+.bedmas-steps .step-example {
+    font-style: italic;
+    color: var(--sidebar-text); /* Slightly dimmer text */
+    margin-top: 0.6em;
+    padding-left: 1em;
+    border-left: 2px solid var(--border-color); /* Indent example visually */
+}
+.bedmas-steps .step-example code,
+.bedmas-steps .step-example strong {
+    font-style: normal; /* Prevent code/strong from being italic */
+}
+
+/* --- Adjust Example/Solution slightly --- */
+.example {
+    /* Removed background, let it blend more */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1em 1.5em;
+    margin: 2em 0; /* More spacing between examples */
+}
+.solution {
+     background-color: rgba(0,0,0,0.1); /* Subtle bg for solution area */
+     padding: 0.5em 1em 1em 1em;
+     border-radius: 0 0 4px 4px; /* Match bottom corners of example */
+     margin-left: -1em; /* Align with left edge inside padding */
+     margin-right: -1em; /* Align with right edge inside padding */
+     margin-bottom: -0.5em; /* Reduce space below */
+}
+.solution p:first-child {
+     margin-top: 0; /* Remove top margin for "Step-by-step" */
+}
+
+/* --- Styling for Key Concept Box --- */
+.key-concept {
+    background-color: rgba(0,0,0,0.15); /* Slightly different background */
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-blue); /* Accent border on the left */
+    padding: 1em 1.5em;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+.key-concept h4 {
+    margin-top: 0;
+    color: var(--heading-color);
+}
+.key-concept ul {
+    padding-left: 1.2em;
+    margin-top: 0.5em;
+}
+
+/* --- Styling for Key Concept Box --- */
+.key-concept {
+    background-color: rgba(0,0,0,0.15); /* Slightly different background */
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-blue); /* Accent border on the left */
+    padding: 1em 1.5em;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+.key-concept h4 {
+    margin-top: 0;
+    color: var(--heading-color);
+}
+.key-concept ul, .key-concept ol { /* Style lists inside */
+    padding-left: 1.2em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.key-concept p:last-child {
+     margin-bottom: 0; /* Remove extra space at bottom */
+}
+
+/* Style for inline examples within concept boxes */
+.step-example {
+    font-style: italic;
+    color: var(--sidebar-text); /* Slightly dimmer text */
+    margin-top: 0.6em;
+    padding-left: 1em;
+    border-left: 2px solid var(--border-color); /* Indent example visually */
+}
+.step-example code,
+.step-example strong {
+    font-style: normal; /* Prevent code/strong from being italic */
+}
+
+
+  /* --- Responsiveness --- */
+  @media (max-width: 900px) { /* Adjust breakpoint as needed */
+    :root { --sidebar-width: 240px; } /* Slightly narrower sidebar */
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-100%); /* Start hidden */
+      position: fixed; /* Ensure it stays fixed when toggled */
+      border-right: none;
+    }
+    .page-container.sidebar-visible .sidebar { /* New class to force visible */
+        transform: translateX(0);
+        box-shadow: 2px 0 10px rgba(0,0,0,0.3); /* Add shadow when overlaying */
+    }
+    .main-content {
+        margin-left: 0 !important; /* Always 0 margin on mobile */
+        padding: 0; /* Remove padding, handled by header/article */
+    }
+    .main-header {
+         position: sticky; /* Keep header sticky */
+         padding: 0 1em;
+    }
+    .site-title { font-size: 1.2em; }
+    .main-content article { margin: 1.5em auto; padding: 0 1em; }
+     /* When sidebar is hidden (default on mobile), allow main content interactions */
+    .page-container.sidebar-hidden .main-content { pointer-events: auto; }
+    /* Optional: Add overlay when sidebar is open on mobile? */
+  }
