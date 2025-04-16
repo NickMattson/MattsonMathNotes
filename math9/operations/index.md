@@ -2,7 +2,6 @@
 title: "Math 9 - Operations"
 layout: "base.njk"
 permalink: /math9/operations/index.html
-parent: "Math 9"
 tags: ["math9", "math9-operations"]
 ---
 

@@ -177,28 +177,31 @@
 
 
             {# --- Previous/Next Page Navigation (Correct Position) --- #}
-            <nav class="page-navigation" aria-label="Lesson">
-                <hr> {# Separator #}
-                <ul class="page-navigation-list">
-                    <li class="page-navigation-item prev">
-                        {% if page.data.previousInSection %}
-                            <a href="{{ page.data.previousInSection.url | url }}">
-                                <span class="label" aria-hidden="true">← Previous</span>
-                                <span class="title">{{ page.data.previousInSection.data.title }}</span>
-                            </a>
-                        {% endif %}
-                    </li>
-                    <li class="page-navigation-item next">
-                         {% if page.data.nextInSection %}
-                            <a href="{{ page.data.nextInSection.url | url }}">
-                                <span class="label" aria-hidden="true">Next →</span>
-                                <span class="title">{{ page.data.nextInSection.data.title }}</span>
-                            </a>
-                        {% endif %}
-                    </li>
-                </ul>
+            {% if page.data.parent %}  {# <-- NEW conditional #}
+                {% if page.data.previousInSection or page.data.nextInSection %}
+                <nav class="page-navigation" aria-label="Lesson">
+                    <hr> {# Separator #}
+                    <ul class="page-navigation-list">
+                        <li class="page-navigation-item prev">
+                            {% if page.data.previousInSection %}
+                                <a href="{{ page.data.previousInSection.url | url }}">
+                                    <span class="label" aria-hidden="true">← Previous</span>
+                                    <span class="title">{{ page.data.previousInSection.data.title }}</span>
+                                </a>
+                            {% endif %}
+                        </li>
+                        <li class="page-navigation-item next">
+                            {% if page.data.nextInSection %}
+                                <a href="{{ page.data.nextInSection.url | url }}">
+                                    <span class="label" aria-hidden="true">Next →</span>
+                                    <span class="title">{{ page.data.nextInSection.data.title }}</span>
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
             </nav>
-            
+                {% endif %}
+            {% endif %}
             {# --- End Previous/Next Navigation --- #}
 
 
