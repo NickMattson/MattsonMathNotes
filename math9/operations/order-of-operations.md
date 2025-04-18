@@ -1,7 +1,7 @@
 ---
 title: "Order of Operations (BEDMAS)"
 layout: "base.njk"
-parent: "Math 9 - Operations"
+parent: "Math 9 - Operations" #
 tags: ["math9", "math9-operations"]
 order: 1
 ---
@@ -184,4 +184,3 @@ The acronym **BEDMAS** helps us remember the correct order:
         <p><em>Result: $-\frac{35}{12}$ or $-2\frac{11}{12}$</em></p>
     </div>
 </div>
-
